@@ -1,0 +1,33 @@
+use macroquad::prelude::*;
+
+struct BaseTraits {
+    speed : (f32, f32),
+    pv : u32,
+    defense : u32,
+    attack : u32,
+    zombi : u32,
+    detect_radius : f32,
+}
+
+pub enum EntityType {
+    Civil,
+    Military,
+    Zombi
+}
+
+enum Behavior {
+    Fairful,
+    Normal,
+    Brave
+}
+
+enum AttackPriority {
+    Civil(String, bool),
+    Military(String, bool),
+    Zombi(String, bool)
+}
+
+pub struct Entity {
+    entity_type : EntityType,
+    behavior : Behavior,
+}
