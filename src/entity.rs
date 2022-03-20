@@ -1,6 +1,6 @@
 use macroquad::prelude::*;
 
-struct BaseTraits {
+struct BasicStats {
     speed : (f32, f32),
     pv : u32,
     defense : u32,
@@ -15,7 +15,7 @@ pub enum EntityType {
     Zombi
 }
 
-enum Behavior {
+enum Behaviors {
     Fairful,
     Normal,
     Brave
@@ -29,5 +29,5 @@ enum AttackPriority {
 
 pub struct Entity {
     entity_type : EntityType,
-    behavior : Behavior,
+    behavior : Behaviors,
 }

@@ -1,13 +1,26 @@
 use macroquad::prelude::*;
 use crate::Scene;
+use crate::base_scene::BaseScene;
 
-pub struct SceneGame {}
+pub struct SceneGame {
+    next_scene : BaseScene,
+}
 impl SceneGame {
-
-    pub fn inputs(&self) {}
+    pub fn init() -> Self {
+        SceneGame {
+            next_scene : BaseScene::new(Scene::Game),
+        }
+    }
+    pub fn inputs(&mut self) {
+        self.next_scene.reset_scene();
+        if is_key_down(KeyCode::Space) {
+            println!("press space into Game");
+            self.next_scene.set_next_scene(Scene::Menu);
+        }
+    }
     pub fn update(&mut self) -> Scene {
         
-        Scene::Game
+        self.next_scene.get_next_scene()
     }
     pub fn draw(&self) {
         clear_background(YELLOW);
