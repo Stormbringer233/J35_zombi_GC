@@ -3,10 +3,12 @@ mod scene_game;
 mod scene_worldmap;
 mod scene_game_over;
 mod base_scene;
+pub mod resources;
 use scene_menu::SceneMenu;
 use scene_game::SceneGame;
 use scene_worldmap::SceneWorldMap;
 use scene_game_over::SceneGameOver;
+use resources::Resources;
 
 #[derive(Copy, Clone, Debug)]
 pub enum Scene {
@@ -18,6 +20,7 @@ pub enum Scene {
 
 pub struct State {
     state : Scene,
+    resources : Resources,
     scene_menu : SceneMenu,
     scene_game : SceneGame,
     scene_worldmap : SceneWorldMap,
@@ -25,14 +28,16 @@ pub struct State {
 }
 
 impl State {
-    pub fn init() -> State {
-        State {
+    pub fn init(resources : Resources) -> State {
+        let s = State {
             state : Scene::Menu,
-            scene_menu : SceneMenu::init(),
+            scene_menu : SceneMenu::init(&resources),
             scene_worldmap : SceneWorldMap{},
             scene_game : SceneGame::init(),
             scene_game_over : SceneGameOver{},
-        }
+            resources,
+        };
+        s
     }
 
     pub fn update(&mut self) {
