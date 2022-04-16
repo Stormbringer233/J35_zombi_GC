@@ -1,12 +1,13 @@
 use macroquad::prelude::*;
 use crate::Scene;
 use crate::base_scene::BaseScene;
+use crate::loader::Loader;
 
 pub struct SceneGame {
     next_scene : BaseScene,
 }
 impl SceneGame {
-    pub fn init() -> Self {
+    pub fn init(loader : &Loader) -> Self {
         SceneGame {
             next_scene : BaseScene::new(Scene::Game),
         }

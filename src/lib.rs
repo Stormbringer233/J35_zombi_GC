@@ -3,12 +3,28 @@ mod scene_game;
 mod scene_worldmap;
 mod scene_game_over;
 mod base_scene;
-pub mod resources;
-use scene_menu::SceneMenu;
-use scene_game::SceneGame;
-use scene_worldmap::SceneWorldMap;
-use scene_game_over::SceneGameOver;
-use resources::Resources;
+pub mod loader;
+mod components;
+mod spawner;
+mod systems;
+
+mod prelude {
+    pub use macroquad::prelude::*;
+    pub use legion::*;
+    pub use legion::world::SubWorld;
+    pub use legion::systems::CommandBuffer;
+
+    pub use crate::scene_menu::SceneMenu;
+    pub use crate::scene_game::SceneGame;
+    pub use crate::scene_worldmap::SceneWorldMap;
+    pub use crate::scene_game_over::SceneGameOver;
+    pub use crate::loader::Loader;
+
+    pub use crate::systems::*;
+    pub use crate::components::*;
+    pub use crate::spawner::*;
+}
+use prelude::*;
 
 #[derive(Copy, Clone, Debug)]
 pub enum Scene {
@@ -20,7 +36,6 @@ pub enum Scene {
 
 pub struct State {
     state : Scene,
-    resources : Resources,
     scene_menu : SceneMenu,
     scene_game : SceneGame,
     scene_worldmap : SceneWorldMap,
@@ -28,20 +43,17 @@ pub struct State {
 }
 
 impl State {
-    pub fn init(resources : Resources) -> State {
-        let s = State {
+    pub fn init(loader : Loader) -> State {
+        State {
             state : Scene::Menu,
-            scene_menu : SceneMenu::init(&resources),
+            scene_menu : SceneMenu::init(&loader),
             scene_worldmap : SceneWorldMap{},
-            scene_game : SceneGame::init(),
+            scene_game : SceneGame::init(&loader),
             scene_game_over : SceneGameOver{},
-            resources,
-        };
-        s
+        }
     }
 
     pub fn update(&mut self) {
-        
         match self.state {
             Scene::Menu => {
                 self.scene_menu.inputs();
@@ -64,9 +76,5 @@ impl State {
                 self.scene_game_over.draw();
             }
         }
-    }
-
-    pub fn draw(&self) {
-
     }
 }

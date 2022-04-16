@@ -2,17 +2,17 @@ use macroquad::prelude::*;
 use std::collections::HashMap;
 use std::path::PathBuf;
 
-pub struct Resources {
+pub struct Loader {
     path : PathBuf,
     textures : HashMap<String, Texture2D>,
 
 }
 
-impl Resources {
-    pub fn new(path : &str) -> Resources {
+impl Loader {
+    pub fn new(path : &str) -> Loader {
         // let p = std::env::current_dir().unwrap();
         // println!("cwd : {}", p.display());
-        Resources {
+        Loader {
             path : PathBuf::from(path),
             textures : HashMap::new(),
         }
@@ -30,6 +30,10 @@ impl Resources {
         // let texture = self.textures.remove(key).unwrap(); // remove texture from hashmap, but needs &mut self into signature
         let texture = self.textures.get(key).unwrap().clone(); // keep texture into the hashmap
         texture
+    }
+
+    pub fn get_ref_texture(&self, key : &str) -> &Texture2D {
+        self.textures.get(key).unwrap()
     }
 
     fn get_list_of_images(&mut self) -> HashMap<String, PathBuf> {
