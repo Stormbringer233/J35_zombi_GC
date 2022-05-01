@@ -10,6 +10,7 @@ pub fn spawn_zombi(ecs : &mut World, pos:Vec2, texture : Texture2D) {
             Render {
                 texture,
                 color : WHITE,
+                to_draw : true,
             }
         )
     );

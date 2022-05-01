@@ -22,7 +22,6 @@ impl BaseScene {
         match self.next_scene {
             Scene::Menu => Scene::Menu,
             Scene::Game => Scene::Game,
-            Scene::WorldMap => Scene::WorldMap,
             Scene::GameOver => Scene::GameOver
         }
     }

@@ -1,7 +1,17 @@
 pub use macroquad::prelude::*;
 use jam35_zombi::loader::Loader;
+mod constants;
+use constants::*;
 
-#[macroquad::main("jam35 zombi")]
+fn window_conf() -> Conf {
+    Conf { window_title: "jam35 zombi".to_owned(),
+         window_width: WINDOW_W,
+         window_height: WINDOW_H,
+         window_resizable : false,
+         ..Default::default()
+    }
+}
+#[macroquad::main(window_conf)]
 async fn main() {
     //jam35_zombi::running();
     let mut loader = Loader::new("assets");

@@ -1,13 +1,22 @@
-use macroquad::prelude::*;
+use crate::prelude::*;
 use crate::Scene;
 
-pub struct SceneWorldMap {}
+pub struct SceneWorldMap {
+    ecs : Option<World>,
+    resources : Option<Resources>,
+}
 impl SceneWorldMap {
+    pub fn init(loader : &Loader) -> Self {
+        SceneWorldMap {
+            ecs : None,
+            resources : None,
+        }
+    }
 
     pub fn inputs(&self) {}
     pub fn update(&mut self) -> Scene {
         
-        Scene::WorldMap
+        Scene::Game
     }
     pub fn draw(&self) {
         clear_background(ORANGE);

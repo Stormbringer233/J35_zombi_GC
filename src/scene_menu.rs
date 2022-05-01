@@ -1,16 +1,12 @@
 use crate::prelude::*;
 use crate::Scene;
 use crate::base_scene::BaseScene;
-use crate::loader::Loader;
 
 struct Line {
     pos : (f32,f32)
 }
 pub struct SceneMenu {
-    ecs : World,
-    resources : Resources,
     next_scene : BaseScene,
-    player_system : Schedule,
     line : Line,
     tex : Texture2D,
     r : f32,
@@ -18,16 +14,9 @@ pub struct SceneMenu {
 
 impl SceneMenu {
     pub fn init(loader : &Loader) -> Self {
-        let mut ecs = legion::World::default();
-        let resources = Resources::default();
-
-        spawn_zombi(&mut ecs, Vec2::new(350.0,150.0), loader.get_texture_2d("policeman"));
 
         Self {
-            ecs,
-            resources,
             next_scene : BaseScene::new(Scene::Menu),
-            player_system : build_player_scheduler(),
             line : Line{pos : (20.0, 50.0)},
             tex : loader.get_texture_2d("policeman"),
             r : 0f32,
@@ -69,6 +58,5 @@ impl SceneMenu {
         
         draw_line(pos_rot.0-20.0,pos_rot.1,pos_rot.0+20.0,pos_rot.1,1.0,WHITE);
         draw_line(pos_rot.0,pos_rot.1 - 20.0,pos_rot.0,pos_rot.1+20.0,1.0,WHITE);
-        self.player_system.execute(&mut self.ecs, &mut self.resources);
     }
 }

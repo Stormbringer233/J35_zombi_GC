@@ -36,6 +36,10 @@ impl Loader {
         self.textures.get(key).unwrap()
     }
 
+    pub fn print_textures(&self) {
+        println!("textures : {:?}", self.textures);
+    }
+    
     fn get_list_of_images(&mut self) -> HashMap<String, PathBuf> {
         let mut paths : HashMap<String, PathBuf> = HashMap::new();
         for entry in self.path.read_dir().expect("failed to read dir") {
@@ -60,5 +64,6 @@ impl Loader {
             let tex2d = load_texture(file.to_str().unwrap()).await.unwrap();
             self.textures.insert(name.to_owned(), tex2d);
         }
+        //self.print_textures();
     }
 }
