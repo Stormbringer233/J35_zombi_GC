@@ -1,18 +1,18 @@
 use crate::Scene;
 
 pub struct BaseScene {
-    next_scene : Scene,
-    base_scene : Scene,
+    next_scene: Scene,
+    base_scene: Scene,
 }
 
 impl BaseScene {
-    pub fn new(base_scene : Scene) -> Self {
+    pub fn new(base_scene: Scene) -> Self {
         BaseScene {
-            next_scene : base_scene,
-            base_scene : base_scene,
+            next_scene: base_scene,
+            base_scene: base_scene,
         }
     }
-    pub fn set_next_scene(&mut self, next_scene : Scene) {
+    pub fn set_next_scene(&mut self, next_scene: Scene) {
         self.next_scene = next_scene;
     }
     pub fn reset_scene(&mut self) {
@@ -22,7 +22,7 @@ impl BaseScene {
         match self.next_scene {
             Scene::Menu => Scene::Menu,
             Scene::Game => Scene::Game,
-            Scene::GameOver => Scene::GameOver
+            Scene::GameOver => Scene::GameOver,
         }
     }
 }

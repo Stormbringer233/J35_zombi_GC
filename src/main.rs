@@ -1,14 +1,15 @@
-pub use macroquad::prelude::*;
 use jam35_zombi::loader::Loader;
+pub use macroquad::prelude::*;
 mod constants;
 use constants::*;
 
 fn window_conf() -> Conf {
-    Conf { window_title: "jam35 zombi".to_owned(),
-         window_width: WINDOW_W,
-         window_height: WINDOW_H,
-         window_resizable : false,
-         ..Default::default()
+    Conf {
+        window_title: "jam35 zombi".to_owned(),
+        window_width: WINDOW_W,
+        window_height: WINDOW_H,
+        window_resizable: false,
+        ..Default::default()
     }
 }
 #[macroquad::main(window_conf)]
