@@ -81,7 +81,7 @@ impl WorldMap {
         if self.cities.contains_key(&pos) {
             let city = self.cities.get(&pos).unwrap();
             if !city.is_selected() {
-                if self.selected_cities.len() < 3 {
+                if self.selected_cities.len() < MAX_SELECTABLE_CITIES {
                 // 3 cities selected at time
                     self.cities.get_mut(&pos).unwrap().select();
                     self.selected_cities.push(pos);
@@ -94,7 +94,7 @@ impl WorldMap {
                 self.locked = true;
             } else {
                 self.locked = false;
-            } 
+            }
         }
     }
     fn unselect_city(&mut self, position: &Vec2) {

@@ -3,8 +3,6 @@ use crate::prelude::*;
 use crate::Scene;
 
 pub struct SceneGame {
-    ecs: World,
-    resources: Resources,
     render_target: RenderTarget,
     camera: Camera2D,
     next_scene: BaseScene,
@@ -12,17 +10,11 @@ pub struct SceneGame {
 }
 impl SceneGame {
     pub fn init(loader: &Loader) -> Self {
-        let mut ecs = legion::World::default();
-        let mut resources = Resources::default();
         // spawn_zombi(&mut ecs, Vec2::new(350.0,150.0), loader.get_texture_2d("policeman"));
-        let worldmap = WorldMap::new();
-        create_map(&mut ecs, &worldmap, &loader);
-        resources.insert(worldmap);
-        resources.insert(Mouse::init());
+
         let render_target = render_target(WINDOW_W as u32, WINDOW_H as u32);
+        // d.add_func(0, Box::new(|| println!("ok_btn")));
         SceneGame {
-            ecs,
-            resources,
             render_target,
             camera: Camera2D {
                 zoom: vec2(2.0 / WINDOW_W as f32 * SCALE, 2.0 / WINDOW_H as f32 * SCALE),
@@ -41,19 +33,19 @@ impl SceneGame {
             self.next_scene.set_next_scene(Scene::Menu);
         }
     }
-    pub fn update(&mut self) -> Scene {
+
+    pub fn update(&mut self, ecs : &mut World, resources : &mut Resources) -> Scene {
         set_camera(&self.camera);
             clear_background(LIGHTGRAY);
             self.worldmap_system
-                .execute(&mut self.ecs, &mut self.resources);
-            // self.player_system.execute(self.ecs.as_mut().unwrap(), self.resources.as_mut().unwrap());
+                .execute(ecs, resources);
         set_default_camera();
-                                             //  Macroquad bug ?
         self.next_scene.get_next_scene()
     }
     pub fn draw(&self) {
         // Draw the render target
         clear_background(LIGHTGRAY);
         draw_texture(self.render_target.texture, 0.0, 0.0, WHITE);
+
     }
 }

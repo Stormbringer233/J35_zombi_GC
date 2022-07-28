@@ -10,6 +10,7 @@ mod scene_menu;
 mod scene_worldmap;
 mod spawner;
 mod systems;
+mod gui;
 mod worldmap_creation;
 
 mod prelude {
@@ -18,6 +19,7 @@ mod prelude {
     pub use legion::*;
     pub use macroquad::prelude::*;
 
+    pub use crate::gui::*;
     pub use crate::components::*;
     pub use crate::constants::*;
     pub use crate::loader::Loader;
@@ -41,6 +43,8 @@ pub enum Scene {
 }
 
 pub struct State {
+    ecs : World,
+    resources : Resources,
     state: Scene,
     scene_menu: SceneMenu,
     scene_game: SceneGame,
@@ -49,12 +53,25 @@ pub struct State {
 
 impl State {
     pub fn init(loader: Loader) -> State {
-        State {
+        let mut ecs = legion::World::default();
+        let mut resources = Resources::default();
+        State::init_scenes(&mut ecs, &mut resources, &loader);
+
+        let s  = State {
+            ecs,
+            resources,
             state: Scene::Game,
             scene_menu: SceneMenu::init(&loader),
             scene_game: SceneGame::init(&loader),
             scene_game_over: SceneGameOver {},
-        }
+        };
+        s
+    }
+    fn init_scenes(ecs : &mut World, resources : &mut Resources, loader : &Loader) {
+        let worldmap = WorldMap::new();
+        create_map(ecs, &worldmap, &loader);
+        resources.insert(worldmap);
+        resources.insert(Mouse::init());
     }
 
     pub fn update(&mut self) {
@@ -66,7 +83,7 @@ impl State {
             }
             Scene::Game => {
                 self.scene_game.inputs();
-                self.state = self.scene_game.update();
+                self.state = self.scene_game.update(&mut self.ecs, &mut self.resources);
                 self.scene_game.draw();
             }
             Scene::GameOver => {
@@ -76,4 +93,6 @@ impl State {
             }
         }
     }
+
+
 }

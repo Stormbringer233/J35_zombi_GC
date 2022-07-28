@@ -6,3 +6,5 @@ pub const SCALE: f32 = 1.0;
 pub const CITY_FOCUS_RADIUS: f32 = 8.0;
 #[allow(dead_code)]
 pub const FONT_SIZE1 : f32 = 20.0;
+#[allow(dead_code)]
+pub const MAX_SELECTABLE_CITIES : usize = 3;

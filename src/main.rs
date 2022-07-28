@@ -16,7 +16,7 @@ fn window_conf() -> Conf {
 async fn main() {
     //jam35_zombi::running();
     let mut loader = Loader::new("assets");
-    loader.load_resources().await;
+    loader.load_resources().await; // load all the resources at begining
     // let t : Texture2D = load_texture("assets/worldmap.png").await.unwrap();
     let mut state = jam35_zombi::State::init(loader);
     loop {
