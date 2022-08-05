@@ -8,7 +8,11 @@ struct BasicStats {
     zombi : u32,
     detect_radius : f32,
 }
-
+pub enum GamePhase {
+    Worldmap,
+    District,
+    Streetview
+}
 pub enum EntityType {
     Civil,
     Military,

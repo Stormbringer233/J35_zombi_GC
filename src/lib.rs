@@ -10,8 +10,9 @@ mod scene_menu;
 mod scene_worldmap;
 mod spawner;
 mod systems;
-mod gui;
+mod widgets;
 mod worldmap_creation;
+mod gui_creation;
 
 mod prelude {
     pub use legion::systems::CommandBuffer;
@@ -19,7 +20,8 @@ mod prelude {
     pub use legion::*;
     pub use macroquad::prelude::*;
 
-    pub use crate::gui::*;
+    pub use crate::widgets::*;
+    pub use crate::gui_creation::*;
     pub use crate::components::*;
     pub use crate::constants::*;
     pub use crate::loader::Loader;
@@ -70,6 +72,7 @@ impl State {
     fn init_scenes(ecs : &mut World, resources : &mut Resources, loader : &Loader) {
         let worldmap = WorldMap::new();
         create_map(ecs, &worldmap, &loader);
+        create_wm_widgets(ecs);
         resources.insert(worldmap);
         resources.insert(Mouse::init());
     }

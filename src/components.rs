@@ -2,7 +2,8 @@ use crate::prelude::*;
 
 #[derive(Debug)]
 pub struct Zombi;
-
+pub struct Widget;
+pub struct Id(pub usize);
 pub struct WorldMapTexture;
 #[derive(Debug)]
 pub struct Render {

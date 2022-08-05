@@ -2,6 +2,7 @@ use crate::base_scene::BaseScene;
 use crate::prelude::*;
 use crate::Scene;
 
+
 pub struct SceneGame {
     render_target: RenderTarget,
     camera: Camera2D,
@@ -24,6 +25,7 @@ impl SceneGame {
             },
             next_scene: BaseScene::new(Scene::Game),
             worldmap_system: build_worldmap_system(),
+
         }
     }
     pub fn inputs(&mut self) {
