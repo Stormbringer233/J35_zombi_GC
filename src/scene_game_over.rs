@@ -1,12 +1,9 @@
-use crate::Scene;
 use macroquad::prelude::*;
 
 pub struct SceneGameOver {}
 impl SceneGameOver {
     pub fn inputs(&self) {}
-    pub fn update(&mut self) -> Scene {
-        Scene::GameOver
-    }
+    pub fn update(&mut self) {}
 
     pub fn draw(&self) {
         clear_background(BLACK);

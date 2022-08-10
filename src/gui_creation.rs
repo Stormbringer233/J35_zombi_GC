@@ -19,6 +19,7 @@ pub fn create_wm_widgets(ecs : &mut World) {
         Id(1),
         button::Button::builder()
             .position(WINDOW_W - 280,WINDOW_H - 50)
+            .style(Style::RoundFlat)
             .with_theme(FLAT_BLUE)
             .caption("Go to District")
             .build()
@@ -29,7 +30,31 @@ pub fn create_wm_widgets(ecs : &mut World) {
         button::Button::builder()
             .position(WINDOW_W - 40 - 10,10)
             .dimensions(40,40)
+            .style(Style::RoundFlat)
             .with_theme(FLAT_RED_EXIT)
             .caption("X").build()
+    ));
+    ecs.push((
+        Widget,
+        Id(10),
+        button::Button::builder()
+            .position(10, WINDOW_H - 50)
+            // .dimensions(250,40)
+            .style(Style::RoundFlat)
+            .with_theme(FLAT_BLUE)
+            .caption("Return to worldmap")
+            .build()
+    ));
+    ecs.push((
+        Widget,
+        Id(11),
+        button::Button::builder()
+
+            .position(WINDOW_W - 280,WINDOW_H - 50)
+            .dimensions(250,40)
+            .style(Style::RoundFlat)
+            .with_theme(FLAT_BLUE)
+            .caption("Go to StreetView")
+            .build()
     ));
 }

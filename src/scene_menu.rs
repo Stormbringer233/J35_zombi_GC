@@ -1,12 +1,9 @@
-use crate::base_scene::BaseScene;
 use crate::prelude::*;
-use crate::Scene;
 
 struct Line {
     pos: (f32, f32),
 }
 pub struct SceneMenu {
-    next_scene: BaseScene,
     line: Line,
     tex: Texture2D,
     r: f32,
@@ -15,24 +12,17 @@ pub struct SceneMenu {
 impl SceneMenu {
     pub fn init(loader: &Loader) -> Self {
         Self {
-            next_scene: BaseScene::new(Scene::Menu),
             line: Line { pos: (20.0, 50.0) },
             tex: loader.get_texture_2d("policeman"),
             r: 0f32,
         }
     }
 
-    pub fn inputs(&mut self) {
-        self.next_scene.reset_scene();
-        if is_mouse_button_down(MouseButton::Left) {
-            self.next_scene.set_next_scene(Scene::Game);
-        }
-    }
+    pub fn inputs(&mut self) {}
 
-    pub fn update(&mut self) -> Scene {
+    pub fn update(&mut self) {
         self.line.pos.0 += 1.0;
         self.r += 0.02;
-        self.next_scene.get_next_scene()
     }
 
     pub fn draw(&mut self) {

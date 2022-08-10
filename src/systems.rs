@@ -1,7 +1,8 @@
 use crate::prelude::*;
 mod city_scope;
-mod wm_render;
+mod test_district;
 mod wm_gui;
+mod wm_render;
 
 pub fn build_worldmap_system() -> Schedule {
     Schedule::builder()
@@ -13,12 +14,10 @@ pub fn build_worldmap_system() -> Schedule {
 
 pub fn build_district_system() -> Schedule {
     Schedule::builder()
-
-    .build()
+        .add_system(test_district::test_district_system())
+        .build()
 }
 
 pub fn build_streetview_system() -> Schedule {
-    Schedule::builder()
-
-    .build()
+    Schedule::builder().build()
 }

@@ -1,8 +1,8 @@
 pub use macroquad::prelude::*;
 
 pub struct MouseStates {
-    pub position : (f32, f32),
-    pub left_btn : bool,
+    pub position: (f32, f32),
+    pub left_btn: bool,
 }
 #[derive(Copy, Clone)]
 pub struct Mouse {
@@ -31,8 +31,8 @@ impl Mouse {
     }
     pub fn states(&self) -> MouseStates {
         MouseStates {
-            position : mouse_position(),
-            left_btn : self._clicked(MouseButton::Left),
+            position: mouse_position(),
+            left_btn: self._clicked(MouseButton::Left),
         }
     }
     pub fn _clicked(&self, button: MouseButton) -> bool {

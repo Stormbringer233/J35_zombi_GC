@@ -11,9 +11,17 @@ pub struct Render {
     pub color: Color,
     pub to_draw: bool,
 }
-
+#[derive(Debug, Copy, Clone)]
+pub enum GamePhase {
+    WorldMap,
+    District,
+    StreetView,
+}
+#[derive(Debug, Copy, Clone)]
+pub enum SceneState {
+    Menu,
+    Game(GamePhase),
+}
 pub struct Plot;
 #[derive(Debug)]
 pub struct CityPointer;
-
-pub struct Popup;
